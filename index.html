@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D House of Spades - Casino Spins</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Prevent scrolling */
+    }
+    canvas {
+      display: block; /* Ensures canvas fits browser */
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/three.min.js"></script>
+  <script>
+    // Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Add Light
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    // Load 3D Spade Shape (Placeholder: 3D Box Example)
+    const geometry = new THREE.BoxGeometry(); // Replace with spade geometry
+    const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const spade = new THREE.Mesh(geometry, material);
+    spade.position.set(0, 0, -2);
+    scene.add(spade);
+
+    // Animation Loop
+    function animate() {
+      spade.rotation.y += 0.03; // Rotate Spade
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Handle Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
